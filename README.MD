@@ -25,7 +25,7 @@ Allow the app to index the data and navigate to data of choice.
 
 `git clone --recurse-submodules [LINK TO GIT]`
 
-`run task that npm i inside of submodule and build to /resource`
+`TODO run task that will build into /resource`
 
 ## TODO
 
