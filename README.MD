@@ -9,9 +9,9 @@ A cross-platform application that can parse the discord data package through a G
 
 ## Install
 
-Choose latest release for your version
+Download the lastest versionand unzip onto your desktop
 
-- TODO - ADD RELEASES
+[Download here](https://github.com/genki-ai/discord-data-reader-app/releases)
 
 ## How to use
 
