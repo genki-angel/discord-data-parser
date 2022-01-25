@@ -1,0 +1,3 @@
+[submodule "discord-data-reader-vue"]
+	path = discord-data-reader-vue
+	url = https://github.com/genki-ai/discord-data-reader-vue
