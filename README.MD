@@ -23,7 +23,7 @@ Allow the app to index the data and navigate to data of choice.
 
 ## Build
 
-`git clone --recurse-submodules [LINK TO GIT]`
+`git clone --recurse-submodules https://github.com/genki-ai/discord-data-reader-app.git`
 
 `TODO run task that will build into /resource`
 
