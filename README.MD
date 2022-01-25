@@ -23,6 +23,11 @@ Allow the app to index the data and navigate to data of choice.
 
 ## Build
 
+### REQUIREMENTS
+
+Requires Neutralinojs 
+```npm i -g @neutralinojs/neu```
+
 `git clone --recurse-submodules https://github.com/genki-ai/discord-data-reader-app.git`
 
 `TODO run task that will build into /resource`
