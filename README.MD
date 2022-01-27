@@ -35,8 +35,8 @@ Requires Neutralinojs
 ## TODO
 
 - [ ] Simplify indexing function
-- [ ] Overhaul CSS
-- [ ] Refactor menu process
+- [x] Overhaul CSS
+- [x] Refactor menu process
 - [ ] Include more data from package
 - [ ] Analytic tools
 
