@@ -13,6 +13,8 @@ Download the lastest versionand unzip onto your desktop.
 
 [Download here](https://github.com/genki-ai/discord-data-reader-app/releases)
 
+My device is not listed? [Build from source](https://neutralino.js.org/docs/distribution/overview)
+
 ## How to use
 
 Have you have your Package.zip ready. [My what?](https://support.discord.com/hc/en-us/articles/360004027692-Requesting-a-Copy-of-your-Data)
@@ -30,7 +32,8 @@ Requires Neutralinojs
 
 `git clone --recurse-submodules https://github.com/genki-ai/discord-data-reader-app.git`
 
-`TODO run task that will build into /resource`
+Compile from source:<br>
+`cd discord-data-reader-vue && npx vue-cli-service build --dest ../resources/ && cd .. && neu build`
 
 ## TODO
 
