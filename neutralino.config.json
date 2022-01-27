@@ -1,6 +1,6 @@
 {
   "applicationId": "discord-data-reader-app",
-  "version": "0.0.1",
+  "version": "0.2",
   "defaultMode": "window",
   "port": 0,
   "documentRoot": "/resources/",
@@ -12,13 +12,12 @@
     "writeToLogFile": true
   },
   "nativeBlockList": [],
-  "globalVariables": {
-  },
+  "globalVariables": {},
   "modes": {
     "window": {
       "title": "discord-data-reader-app",
       "width": 800,
-      "height": 500,
+      "height": 600,
       "minWidth": 400,
       "minHeight": 200,
       "fullScreen": false,
@@ -35,15 +34,11 @@
       "globalVariables": {
         "TEST": "Test value browser"
       },
-      "nativeBlockList": [
-        "filesystem.*"
-      ]
+      "nativeBlockList": ["filesystem.*"]
     },
     "cloud": {
       "url": "/resources/#cloud",
-      "nativeAllowList": [
-        "app.*"
-      ]
+      "nativeAllowList": ["app.*"]
     }
   },
   "cli": {
