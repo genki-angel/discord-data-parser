@@ -1,6 +1,6 @@
 # Discord Data Reader App (DDRA)
 
-The application wrapper for [Discord Data Reader Vue](ttps://github.com/genki-ai/discord-data-reader-vue) (DDRV).
+The application wrapper for [Discord Data Reader Vue](https://github.com/genki-ai/discord-data-reader-vue) (DDRV).
 
 ## Overview
 
