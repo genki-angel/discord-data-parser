@@ -11,7 +11,7 @@ A cross-platform application that can parse the discord data package through a G
 
 Download the lastest release, unzip into an empty directory and run the executable for your platform..
 
-[Download here](https://github.com/genki-ai/discord-data-reader-app/releases)
+[Download here](https://github.com/genki-ai/discord-data-reader-app/releases) (Windows/Linux/Mac)
 
 My device is not listed? [Build from source](https://neutralino.js.org/docs/distribution/overview)
 
