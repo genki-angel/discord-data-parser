@@ -42,6 +42,7 @@ Compile from source:<br>
 - [x] Refactor menu process
 - [ ] Include more data from package
 - [ ] Analytic tools
+- [ ] Message Search Tool
 
 ## Built with
 
