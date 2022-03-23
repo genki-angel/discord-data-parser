@@ -18,8 +18,8 @@
       "title": "discord-data-reader-app",
       "width": 800,
       "height": 600,
-      "minWidth": 400,
-      "minHeight": 200,
+      "minWidth": 800,
+      "minHeight": 600,
       "fullScreen": false,
       "alwaysOnTop": false,
       "icon": "resources/icons/appIcon.png",
@@ -28,7 +28,7 @@
       "maximize": false,
       "hidden": false,
       "resizable": true,
-      "exitProcessOnClose": false
+      "exitProcessOnClose": true
     },
     "browser": {
       "globalVariables": {
