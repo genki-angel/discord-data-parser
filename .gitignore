@@ -8,5 +8,6 @@
 
 # Neutralinojs related files
 .storage
+.tmp
 /temp
 *.log
