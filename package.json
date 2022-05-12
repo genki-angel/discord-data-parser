@@ -1,5 +1,5 @@
 {
-  "name": "discord-data-reader-app",
+  "name": "discord-data-parser",
   "description": "The application wrapper for Discord Data Reader Vue.",
   "version": "0.5.0",
   "scripts": {

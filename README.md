@@ -1,50 +1,49 @@
-# Discord Data Reader App
+# Discord Data Parser
 
-The application wrapper for [Discord Data Reader Vue](https://github.com/genki-ai/discord-data-reader-vue).
-
-## Overview
-
-A cross-platform application that can parse the discord data package through a GUI, making it easier to examine.
+A cross-platform application that can parse the discord data package through a GUI, making it easier to examine through it.
 [What is in my data package?](https://support.discord.com/hc/en-us/articles/360004957991-Your-Discord-Data-Package)
 
-## Install
+## Download
 
-Download the lastest release, unzip into an empty directory and run the executable for your platform..
+Download the [lastest release](https://github.com/genki-ai/discord-data-reader-app/releases) for your operating system, unzip into an empty directory and run the executable for your platform..
 
-[Download here](https://github.com/genki-ai/discord-data-reader-app/releases) (Windows/Linux/Mac)
-
-My device is not listed? [Build from source](https://neutralino.js.org/docs/distribution/overview)
 
 ## How to use
 
 Have you have your Package.zip ready. [My what?](https://support.discord.com/hc/en-us/articles/360004027692-Requesting-a-Copy-of-your-Data)
 
-While DDRA is open, click on the import button and select the Package.zip.
+While DDRA is open, click on the import button and select the package.zip.
 
 Allow the app to index the data and navigate to data of choice.
 
+### ⚠️⚠️RUNNING ON WINDOWS⚠️⚠️
+If you are getting a white screen when you launch the app, you must run the command below in command prompt with __**Admin privilages**__...  <br />
+`CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"` <br />
+[Read more here](https://neutralino.js.org/docs/getting-started/your-first-neutralinojs-app/#step-1-creating-a-new-app)
+
+
 ## Build
 
-### REQUIREMENTS
+`git clone https://github.com/genki-ai/discord-data-reader-app.git` 
 
-Requires Neutralinojs
-`npm i -g @neutralinojs/neu`
+`npm install`
 
-`git clone --recurse-submodules https://github.com/genki-ai/discord-data-reader-app.git`
+`npm run setup`
 
-Compile from source:<br>
-`cd discord-data-reader-vue && npx vue-cli-service build --dest ../resources/ && cd .. && neu build`
+Run from source: `npm run dev`
+
+Compile from source: `npm run build`
 
 ## TODO
 
-- [ ] Simplify indexing function
-- [x] Overhaul CSS
-- [x] Refactor menu process
-- [ ] Include more data from package
-- [ ] Analytic tools
-- [ ] Message Search Tool
+- [ ] Clean up UI
+- [ ] Add analytic functions
+- [ ] Rewrite file handling and indexing logic
+- [ ] Logging
+- [ ] Export data
+- [ ] Message search
 
 ## Built with
 
-- [Discord Data Reader Vue](https://github.com/genki-ai/discord-data-reader-vue)
 - [Neutralinojs](https://github.com/neutralinojs/neutralinojs)
+- my tiny hands

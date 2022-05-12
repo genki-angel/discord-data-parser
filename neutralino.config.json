@@ -1,5 +1,5 @@
 {
-  "applicationId": "discord-data-reader-app",
+  "applicationId": "discord-data-parser",
   "version": "0.5",
   "defaultMode": "window",
   "port": 0,
@@ -21,7 +21,7 @@
   "globalVariables": {},
   "modes": {
     "window": {
-      "title": "discord-data-reader-app",
+      "title": "Discord Data Parser",
       "width": 800,
       "height": 600,
       "minWidth": 800,
@@ -55,7 +55,7 @@
     }
   },
   "cli": {
-    "binaryName": "discord-data-reader-app",
+    "binaryName": "discord-data-parser",
     "resourcesPath": "/resources/",
     "extensionsPath": "/extensions/",
     "clientLibrary": "/resources/js/neutralino.js",
