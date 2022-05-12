@@ -12,11 +12,11 @@ Download the [lastest release](https://github.com/genki-ai/discord-data-reader-a
 
 Have you have your Package.zip ready. [My what?](https://support.discord.com/hc/en-us/articles/360004027692-Requesting-a-Copy-of-your-Data)
 
-While DDRA is open, click on the import button and select the package.zip.
+While the application is open, click on the import button and select the package.zip.
 
 Allow the app to index the data and navigate to data of choice.
 
-### ⚠️⚠️RUNNING ON WINDOWS⚠️⚠️
+### ⚠️⚠️**RUNNING ON WINDOWS**⚠️⚠️
 If you are getting a white screen when you launch the app, you must run the command below in command prompt with __**Admin privilages**__...  <br />
 `CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"` <br />
 [Read more here](https://neutralino.js.org/docs/getting-started/your-first-neutralinojs-app/#step-1-creating-a-new-app)
