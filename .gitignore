@@ -11,3 +11,6 @@
 .tmp
 /temp
 *.log
+
+# NodeJS files
+node_modules
