@@ -1,0 +1,67 @@
+// Copyright (C) 2022 genki
+//
+// This file is part of discord-data-reader-vue.
+//
+// discord-data-reader-vue is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// discord-data-reader-vue is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with discord-data-reader-vue.  If not, see <http://www.gnu.org/licenses/>.
+
+@font-face {
+  font-family: "NotoSans";
+  src: local("NotoSans"), url("scss/NotoSans/NotoSans.woff") format("woff"),
+    url("scss/NotoSans/NotoSans.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "NotoSans";
+}
+.button {
+  cursor: pointer;
+  color: $fg-dark;
+  padding: 0.5em;
+  margin: 0.2em;
+  border-radius: 0.2em;
+  text-align: center;
+  width: fit-content;
+
+  transition: 0.2s;
+  &:hover {
+    background-color: $accent1-dark;
+  }
+}
+.highlight{
+  background-color: $accent1-dark;
+}
+.unselectable {
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.disable {
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.backpanel {
+  background: $accent2-dark;
+  border-radius: 0.5em;
+  padding: 1em;
+}
