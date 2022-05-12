@@ -3,7 +3,8 @@
   "version": "0.5.0",
   "scripts": {
     "setup": "npm install && (cd discord-data-parser-vue && npm install)",
-    "dev": "cd discord-data-parser-vue && npm run build && cd .. && neu run"
+    "dev": "cd discord-data-parser-vue && npm run build && cd .. && neu run",
+    "build": "cd discord-data-parser-vue && npm run build && cd .. && neu build"
   },
   "author": "genki_angel",
   "license": "MIT",
