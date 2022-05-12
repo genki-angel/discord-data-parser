@@ -3,7 +3,7 @@
   "description": "The application wrapper for Discord Data Reader Vue.",
   "version": "0.5.0",
   "scripts": {
-    "setup": "npm install && cd discord-data-reader-vue && npm install && cd ..",
+    "setup": "npm install && (cd discord-data-reader-vue && npm install)",
     "dev": "cd discord-data-reader-vue && npm run build && cd .. && neu run"
   },
   "author": "genki_angel",
