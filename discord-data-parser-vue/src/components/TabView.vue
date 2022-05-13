@@ -16,16 +16,18 @@
 -->
 
 <template>
-	<div class="tabs">
-		<button class="button" @click="changeTab(1)" > User Data</button>
-		<button class="button" @click="changeTab(2)" > Message Browser</button>
-		<button class="button" @click="changeTab(3)" > Message Search</button>
+	<div class="container">
+		<div class="tabs">
+			<button class="button" @click="changeTab(1)" > User Data</button>
+			<button class="button" @click="changeTab(2)" > Message Browser</button>
+			<button class="button" @click="changeTab(3)" > Message Search</button>
+		</div>
+		<div v-if="selectedTab == 1" id="userData" class="tabContent">
+			<UserData />
+		</div>
+		<div v-if="selectedTab == 2" id="messageBrowser" class="tabContent">MESSAGE BROWSER</div>
+		<div v-if="selectedTab == 3" id="messageSearch" class="tabContent">MESSAGE SEARCH</div>
 	</div>
-	<div v-if="selectedTab == 1" id="userData" class="tabContent">
-		<UserData />
-	</div>
-	<div v-if="selectedTab == 2" id="messageBrowser" class="tabContent">MESSAGE BROWSER</div>
-	<div v-if="selectedTab == 3" id="messageSearch" class="tabContent">MESSAGE SEARCH</div>
 </template>
 
 <script lang="ts">
@@ -48,6 +50,14 @@
 
 <style scoped lang="scss">
 @import "../scss/variables";
+
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	color: $fg-dark;
+}
+
 button {
 	cursor: pointer;
 	color: $fg-dark;
@@ -71,5 +81,6 @@ button {
 .tabContent {
   border: 1px solid $accent3-dark;
   background-color: $bg-dark;
+  flex: 1;
 }
 </style>

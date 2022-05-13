@@ -16,22 +16,40 @@
 -->
 
 <template>
-    <div class="flex">
-        <div id="accountdata" class="backpanel">
-            <div class="key unselectable">ID:</div>
-            <div class="key unselectable">Username:</div>
-            <div class="key unselectable">Email:</div>
-            <div class="key unselectable">Is Verified?:</div>
-            <div class="key unselectable">Has Mobile?:</div>
-            <div class="key unselectable">Phone:</div>
+    <div class="backpanel">
+        <div>Account data</div>
+        <div class="grid">
+            <div class="unselectable">User ID:&nbsp;</div>
+            <div>...</div>
+            <div class="unselectable">Username:&nbsp;</div>
+            <div>...</div>
+            <div class="unselectable">Email:&nbsp;</div>
+            <div>...</div>
+            <div class="unselectable">Is verified:&nbsp;</div>
+            <div>...</div>
+            <div class="unselectable">Mobile Number:&nbsp;</div>
+            <div>...</div>
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
-
+<script lang="ts">
+    import { defineComponent } from "vue";
+	export default defineComponent({});
 </script>
 
-<style lang="scss">
-
+<style scoped lang="scss">
+@import "../scss/variables";
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        color: $fg-dark;
+    }
+    .grid div:nth-child(odd) {
+        text-align: right;
+        opacity: 0.6;
+    }
+    .backpanel {
+        margin: 4px;
+    }
 </style>
