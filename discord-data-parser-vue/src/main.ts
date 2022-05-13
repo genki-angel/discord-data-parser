@@ -1,12 +1,12 @@
 import { createApp } from "vue";
-import App from "./App.vue";
+import Main from "./Main.vue";
 
-import mitt from "mitt";
-const eventbus = mitt();
+const app = createApp(Main);
+
 
 declare let Neutralino: any;
 Neutralino.init();
 
-const app = createApp(App);
-app.config.globalProperties.eventbus = eventbus;
-app.mount("#app");
+Neutralino.events.on('ready', () => {
+    app.mount("#app");
+});

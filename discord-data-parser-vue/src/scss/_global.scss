@@ -24,21 +24,10 @@
 }
 body {
   font-family: "NotoSans";
+  margin: 0;
+  padding: 0;
 }
-.button {
-  cursor: pointer;
-  color: $fg-dark;
-  padding: 0.5em;
-  margin: 0.2em;
-  border-radius: 0.2em;
-  text-align: center;
-  width: fit-content;
 
-  transition: 0.2s;
-  &:hover {
-    background-color: $accent1-dark;
-  }
-}
 .highlight{
   background-color: $accent1-dark;
 }
