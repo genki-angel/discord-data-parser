@@ -17,14 +17,14 @@ You should have received a copy of the GNU General Public License
 along with discord-data-reader-vue.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <template>
-<div>
-  <TabView />
-</div>
+    <div>
+        <TabView />
+    </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
 import TabView from "@/components/TabView.vue"
+import MenuBar from './components/MenuBar.vue';
 </script>
 
 <style lang="scss">

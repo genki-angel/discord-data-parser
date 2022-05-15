@@ -17,6 +17,7 @@
 
 <template>
 	<div class="container">
+		<MenuBar />
 		<div class="tabs">
 			<button @click="changeTab(1)" > Account Data</button>
 			<button @click="changeTab(2)" > Message Browser</button>
@@ -36,6 +37,7 @@
 	import { defineComponent } from "vue";
 	import AccountData from "./AccountData.vue";
 	import MessageBrowser from "./MessageBrowser.vue";
+	import MenuBar from "./MenuBar.vue";
 	export default defineComponent({
 		data() {
 			return {
@@ -47,7 +49,7 @@
 				this.selectedTab = tab;
 			}
 		},
-		components: { AccountData, MessageBrowser }
+		components: { AccountData, MessageBrowser, MenuBar }
 	});
 </script>
 
