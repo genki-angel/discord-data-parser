@@ -24,7 +24,7 @@ If you are getting a white screen when you launch the app, you must run the comm
 
 ## Build
 
-`git clone https://github.com/genki-ai/discord-data-reader-app.git` 
+`git clone https://github.com/genki-angel/discord-data-parser.git` 
 
 `npm install`
 
