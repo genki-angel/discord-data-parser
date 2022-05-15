@@ -18,34 +18,37 @@
 <template>
 	<div class="container">
 		<div class="tabs">
-			<button class="button" @click="changeTab(1)" > User Data</button>
-			<button class="button" @click="changeTab(2)" > Message Browser</button>
-			<button class="button" @click="changeTab(3)" > Message Search</button>
+			<button @click="changeTab(1)" > Account Data</button>
+			<button @click="changeTab(2)" > Message Browser</button>
+			<!-- <button class="button" @click="changeTab(3)" > Message Search</button> -->
 		</div>
-		<div v-if="selectedTab == 1" id="userData" class="tabContent">
-			<UserData />
+		<div v-if="selectedTab == 1" id="accountData" class="tabContent">
+			<AccountData />
 		</div>
-		<div v-if="selectedTab == 2" id="messageBrowser" class="tabContent">MESSAGE BROWSER</div>
+		<div v-if="selectedTab == 2" id="messageBrowser" class="tabContent">
+			<MessageBrowser />
+		</div>
 		<div v-if="selectedTab == 3" id="messageSearch" class="tabContent">MESSAGE SEARCH</div>
 	</div>
 </template>
 
 <script lang="ts">
 	import { defineComponent } from "vue";
-	import UserData from "./UserData.vue";
+	import AccountData from "./AccountData.vue";
+	import MessageBrowser from "./MessageBrowser.vue";
 	export default defineComponent({
-    data() {
-        return {
-            selectedTab: 1
-        };
-    },
-    methods: {
-        async changeTab(tab: number) {
-            this.selectedTab = tab;
-        }
-    },
-    components: { UserData }
-});
+		data() {
+			return {
+				selectedTab: 2
+			};
+		},
+		methods: {
+			async changeTab(tab: number) {
+				this.selectedTab = tab;
+			}
+		},
+		components: { AccountData, MessageBrowser }
+	});
 </script>
 
 <style scoped lang="scss">
@@ -58,7 +61,7 @@
 	color: $fg-dark;
 }
 
-button {
+.tabs button {
 	cursor: pointer;
 	color: $fg-dark;
 	background-color: $accent2-dark;
@@ -82,5 +85,6 @@ button {
   border: 1px solid $accent3-dark;
   background-color: $bg-dark;
   flex: 1;
+  overflow: auto;
 }
 </style>

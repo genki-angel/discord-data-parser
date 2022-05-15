@@ -16,21 +16,23 @@
 -->
 
 <template>
-    <div class="backpanel">
-        <div>Account data</div>
-        <div class="grid">
-            <div class="unselectable">User ID:&nbsp;</div>
-            <div>...</div>
-            <div class="unselectable">Username:&nbsp;</div>
-            <div>...</div>
-            <div class="unselectable">Email:&nbsp;</div>
-            <div>...</div>
-            <div class="unselectable">Is verified:&nbsp;</div>
-            <div>...</div>
-            <div class="unselectable">Mobile Number:&nbsp;</div>
-            <div>...</div>
+    <div class="datapanels">
+        <div class="backpanel">
+            <div class="label">Profile data</div>
+            <div class="grid">
+                <div class="unselectable">User ID:&nbsp;</div>
+                <div>...</div>
+                <div class="unselectable">Username:&nbsp;</div>
+                <div>...</div>
+                <div class="unselectable">Email:&nbsp;</div>
+                <div>...</div>
+                <div class="unselectable">Is verified:&nbsp;</div>
+                <div>...</div>
+                <div class="unselectable">Mobile Number:&nbsp;</div>
+                <div>...</div>
+            </div>
         </div>
-    </div>
+    </div> 
 </template>
 
 <script lang="ts">
@@ -49,7 +51,16 @@
         text-align: right;
         opacity: 0.6;
     }
+    .datapanels {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
     .backpanel {
         margin: 4px;
+    }
+    .label {
+        font-size: 1.3em;
     }
 </style>
