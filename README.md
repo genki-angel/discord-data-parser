@@ -42,6 +42,7 @@ Compile from source: `npm run build`
 - [ ] Logging
 - [ ] Export data
 - [ ] Message search
+- [ ] Show saved gifs
 
 ## Built with
 
