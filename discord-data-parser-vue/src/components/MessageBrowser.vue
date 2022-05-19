@@ -25,7 +25,10 @@
 					<button class="button" @click="changeTab(3)">Groups</button>
 				</div>
 				<div v-if="selectedTab == 1" id="serverList" class="tabContent">
-					Server data...
+					<div class="serverGroup" v-for="server in messageStore.servers" :key="server.id">
+						<span class="serverName"> {{server.name}} </span>
+						<span class="serverChannel" v-for="channel in server.channels" :key="channel.id"> {{channel.name}} </span>
+					</div>
 				</div>
 				<div v-if="selectedTab == 2" id="dmList" class="tabContent">
 					DM data...
@@ -62,20 +65,14 @@
 	</div>
 </template>
 
-<script lang="ts">
-	import { defineComponent } from "vue";
-	export default defineComponent({
-		data() {
-			return {
-				selectedTab: 1
-			};
-    	},
-		methods: {
-			async changeTab(tab: number) {
-				this.selectedTab = tab;
-			}
-		},
-	});
+<script setup lang="ts">
+	import { messageStore } from '@/store/messageStore';
+	import { ref } from 'vue';
+	const selectedTab = ref(2)
+
+	function changeTab(tab: number) {
+		selectedTab.value = tab;
+	}
 </script>
 
 <style scoped lang="scss">
@@ -161,6 +158,26 @@
 	background-color: $bg-dark;
 	flex: 1;
 	overflow: auto;
+	padding: 2px;
+}
+
+.serverGroup {
+	background-color: $accent3-dark;
+	padding: 2px;
+	margin-bottom: 4px;
+}
+
+.serverName {
+	font-size: 1.5em;
+	display: block;
+	margin: 4px;
+}
+
+.serverChannel {
+	display: block;
+	margin: 4px;
+	padding: 4px;
+	background-color: $accent2-dark;
 }
 
 
