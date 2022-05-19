@@ -18,6 +18,7 @@
 <template>
 	<div class="container">
 		<MenuBar />
+		<div class="loading" v-if="appState.isLoading">IMPORTING DATA....</div>
 		<div class="tabs">
 			<button @click="changeTab(1, $event)"> Account Data</button>
 			<button @click="changeTab(2, $event)"> Message Browser</button>
@@ -33,25 +34,18 @@
 	</div>
 </template>
 
-<script lang="ts">
-	import { defineComponent } from "vue";
+<script setup lang="ts">
+	import { ref } from "vue";
 	import AccountData from "./AccountData.vue";
 	import MessageBrowser from "./MessageBrowser.vue";
 	import MenuBar from "./MenuBar.vue";
-	export default defineComponent({
-		data() {
-			return {
-				selectedTab: 2
-			};
-		},
-		methods: {
-			async changeTab(tab: number, event: MouseEvent) {
-				this.selectedTab = tab;
-				
-			}
-		},
-		components: { AccountData, MessageBrowser, MenuBar }
-	});
+	import { appState } from "@/store/appState";
+
+	const selectedTab = ref(2)
+
+	function changeTab(tab: number, event: MouseEvent) {
+		selectedTab.value = tab;
+	}
 </script>
 
 <style scoped lang="scss">
@@ -89,5 +83,8 @@
   background-color: $bg-dark;
   flex: 1;
   overflow: auto;
+}
+.loading {
+	color: $bg-dark;
 }
 </style>
