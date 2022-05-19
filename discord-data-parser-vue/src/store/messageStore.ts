@@ -18,49 +18,13 @@ import { reactive } from 'vue'
 export const messageStore = reactive({
   servers: [
     {
-      id: 1,
-      name: "Server 1",
+      id: "",
+      name: "",
       channels: [
         {
-          id: 1,
-          name: "# channel-1"
+          id: "",
+          name: ""
         },
-        {
-          id: 2,
-          name: "# channel-2"
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: "Server 2",
-      channels: [
-        {
-          id: 1,
-          name: "# channel-1"
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: "Server 3",
-      channels: [
-        {
-          id: 1,
-          name: "# channel-1"
-        },
-        {
-          id: 2,
-          name: "# channel-2"
-        },
-        {
-          id: 3,
-          name: "# channel-3"
-        },
-        {
-          id: 4,
-          name: "# channel-4"
-        }
       ]
     }
   ],

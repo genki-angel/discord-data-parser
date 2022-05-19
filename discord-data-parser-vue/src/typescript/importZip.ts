@@ -81,15 +81,16 @@ export async function importZip() {
         return index;
     });
 
-    for (const [key, value] of channels!) {
+    
+    const loneChannel: { id: string; name: string; }[] = [];
+    for (const [channelID, channelName] of channels!) {
         await dataPackage.then((channelData) => {
-            console.log(`going to... messages/c${key}/channel.json`)
-            return channelData.file(`messages/c${key}/channel.json`)?.async("string");
+            return channelData.file(`messages/c${channelID}/channel.json`)?.async("string");
         })
         .then((result) => {
             console.log("validating...");
             if (result == undefined) {
-                Neutralino.debug.log(`could not find c${key}/channel.json... skipping`, "ERROR");
+                Neutralino.debug.log(`could not find c${channelID}/channel.json... skipping`, "ERROR");
                 return;
             }
         
@@ -97,25 +98,43 @@ export async function importZip() {
             const type = parsed["type"];
             switch (type) {
                 case 0: {
+                    if(!Object.prototype.hasOwnProperty.call(parsed, "guild")) {
+                        loneChannel.push({id: channelID, name: "Unknown channel"});
+                        break;
+                    }
+                    const getGuild = messageStore.servers.find((guild) => { 
+                        return guild.id === parsed["guild"]["id"]
+                    })
+                    if (getGuild) {
+                        console.log("Guild found! " + getGuild.name);
+                        getGuild.channels.push({id: channelID, name: channelName});
+                        break;
+                    }
+                    messageStore.servers.push( {id: parsed["guild"]["id"], name: parsed["guild"]["name"], channels: [{id: channelID, name: channelName}]} );
                     break;
                 }
                 case 1: {
-                    const name = value.substring(20);
-                    messageStore.dms.push( {id: key, name: name} );
+                    const name = channelName.substring(20);
+                    messageStore.dms.push( {id: channelID, name: name} );
                     break;
                 }
                 case 3: {
                     let name;
-                    if(value == null) {
+                    if(channelName == null) {
                         name = "Unnamed Group"
-                    } else { name = value};
-                    messageStore.groups.push( {id: key, name: name} )
+                    } else { name = channelName};
+                    messageStore.groups.push( {id: channelID, name: name} )
                     break;
                 }
             }
         });
     };
 
+    messageStore.servers.push( {id: "NULL", name: "Unknown Server", channels: loneChannel} );
+
+    if(!(messageStore.servers[0].id.length > 1)) {
+        messageStore.servers.shift();
+    }
     if(!(messageStore.dms[0].id.length > 1)) {
         messageStore.dms.shift();
     }

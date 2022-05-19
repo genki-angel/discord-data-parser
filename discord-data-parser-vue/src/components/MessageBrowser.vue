@@ -188,7 +188,7 @@
 	margin: 2px;
 	margin-bottom: 4px;
 	padding: 4px;
-	background-color: $accent2-dark;
+	background-color: $accent3-dark;
 }
 
 
