@@ -64,6 +64,16 @@ export const messageStore = reactive({
       ]
     }
   ],
-  dms: [],
-  groups: [],
+  dms: [
+    {
+      id: "",
+      name: ""
+    }
+  ],
+  groups: [
+    {
+      id: "",
+      name: "",
+    }
+  ],
 })

@@ -1,6 +1,6 @@
 {
   "applicationId": "discord-data-parser",
-  "version": "0.5",
+  "version": "0.6",
   "defaultMode": "window",
   "port": 0,
   "documentRoot": "/resources/",

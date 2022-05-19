@@ -31,10 +31,14 @@
 					</div>
 				</div>
 				<div v-if="selectedTab == 2" id="dmList" class="tabContent">
-					DM data...
+					<div class="channel" v-for="channel in messageStore.dms" :key="channel.id">
+						{{channel.name}}
+					</div>
 				</div>
 				<div v-if="selectedTab == 3" id="groupList" class="tabContent">
-					Group data...
+					<div class="channel" v-for="channel in messageStore.groups" :key="channel.id">
+						{{channel.name}}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -80,12 +84,12 @@
 
 .grid {  
 	height: 100%;
-	padding: 1em;
+	padding: 2px;
 	display: grid;
 	box-sizing: border-box;
  	grid-template-columns: 1fr 2fr;
   	grid-template-rows: 2fr 1fr;
-  	gap: 1em 1em;
+  	gap: 2px 2px;
   	grid-auto-flow: row;
   	grid-template-areas:
     	"channelList messageList"
@@ -179,6 +183,14 @@
 	padding: 4px;
 	background-color: $accent2-dark;
 }
+
+.channel {
+	margin: 2px;
+	margin-bottom: 4px;
+	padding: 4px;
+	background-color: $accent2-dark;
+}
+
 
 
 </style>
