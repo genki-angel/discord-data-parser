@@ -17,7 +17,7 @@
 
 <template>
     <div class="menubar">
-        <button >Import from ZIP</button>
+        <button @click="importZip()" :disabled="appState.isLoading">Import from ZIP</button>
         <button @click="generateAbout()">About</button>
         <button @click="gotoHelp()">Help</button>
         <button class="right" @click="exitApp()">Exit</button>
@@ -25,9 +25,12 @@
 </template>
 
 <script setup lang="ts">
+    import { importZip } from '@/typescript/importZip';
     import { generateAbout } from "@/typescript/generateAbout";
     import { gotoHelp } from "@/typescript/gotoHelp";
     import { exitApp } from "@/typescript/exitApp";   
+
+    import { appState } from '@/store/appState';
 </script>
 
 <style lang="scss">

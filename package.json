@@ -1,6 +1,6 @@
 {
   "name": "discord-data-parser",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "scripts": {
     "setup": "npm install && (cd discord-data-parser-vue && npm install)",
     "dev": "cd discord-data-parser-vue && npm run build && cd .. && neu run",

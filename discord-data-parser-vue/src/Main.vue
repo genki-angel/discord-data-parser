@@ -24,7 +24,6 @@ along with discord-data-reader-vue.  If not, see <http://www.gnu.org/licenses/>.
 
 <script setup lang="ts">
 import TabView from "@/components/TabView.vue"
-
 </script>
 
 <style lang="scss">

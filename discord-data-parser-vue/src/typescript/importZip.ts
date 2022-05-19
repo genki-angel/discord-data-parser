@@ -14,11 +14,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import JSZip from "jszip";
+import { appState } from "@/store/appState";
+import { accountDataStore } from "@/store/accountDataStore";
 
-export async function importZip(dataPackage: any) {
+export async function importZip() {
+
+    appState.isLoading = true;
 
     let data: any;
-
     await Neutralino.os.showOpenDialog("Open package.zip", {
         filters: [
             {name: "zip", extensions: ["zip"]},
@@ -45,8 +48,16 @@ export async function importZip(dataPackage: any) {
                 Neutralino.debug.log("No user.json was found", "ERROR");
                 return;
             }
-            dataPackage.addProfileData(result);
+
+            // This should be added to the store as this will be repeated when importing folder
+            const parsed = JSON.parse(result);
+            accountDataStore.userID = parsed["id"]
+            accountDataStore.userName = parsed["username"] + "#" + parsed["discriminator"]
+            accountDataStore.userEmail = parsed["email"]
+            accountDataStore.userVerified = String(!parsed["verified"])
+            accountDataStore.userMobile = parsed["phone"]
         });
     });
+    appState.isLoading = false;
     console.log("Finished importing...")
 }
