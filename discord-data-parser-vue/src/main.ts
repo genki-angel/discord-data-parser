@@ -1,11 +1,8 @@
-import { createApp } from "vue";
+import { createApp, ref} from "vue";
 import Main from "./Main.vue";
 
-const app = createApp(Main);
-
-
-declare let Neutralino: any;
 Neutralino.init();
+const app = createApp(Main);
 
 Neutralino.events.on('ready', () => {
     app.mount("#app");

@@ -13,9 +13,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-declare let Neutralino: any;
-declare let NL_APPVERSION: string;
-
 export async function generateAbout() {
     await Neutralino.os.showMessageBox("About", `Discord Data Parser\nv${NL_APPVERSION}`);
 }

@@ -19,8 +19,8 @@
 	<div class="container">
 		<MenuBar />
 		<div class="tabs">
-			<button @click="changeTab(1)" > Account Data</button>
-			<button @click="changeTab(2)" > Message Browser</button>
+			<button @click="changeTab(1, $event)"> Account Data</button>
+			<button @click="changeTab(2, $event)"> Message Browser</button>
 			<!-- <button class="button" @click="changeTab(3)" > Message Search</button> -->
 		</div>
 		<div v-if="selectedTab == 1" id="accountData" class="tabContent">
@@ -45,8 +45,9 @@
 			};
 		},
 		methods: {
-			async changeTab(tab: number) {
+			async changeTab(tab: number, event: MouseEvent) {
 				this.selectedTab = tab;
+				
 			}
 		},
 		components: { AccountData, MessageBrowser, MenuBar }

@@ -13,6 +13,5 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-export async function gotoHelp() {
-    Neutralino.os.open("https://github.com/genki-angel/discord-data-parser#how-to-use");
-}
+declare let Neutralino: any;
+declare let NL_APPVERSION: string;

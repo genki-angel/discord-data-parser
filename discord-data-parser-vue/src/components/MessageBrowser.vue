@@ -24,14 +24,14 @@
 					<button class="button" @click="changeTab(2)">DMs</button>
 					<button class="button" @click="changeTab(3)">Groups</button>
 				</div>
-				<div v-if="selectedTab == 1" id="userData" class="tabContent">
-					SERVER LIST...
+				<div v-if="selectedTab == 1" id="serverList" class="tabContent">
+					Server data...
 				</div>
-				<div v-if="selectedTab == 2" id="messageBrowser" class="tabContent">
-					DIRECT MESSAGE LIST
+				<div v-if="selectedTab == 2" id="dmList" class="tabContent">
+					DM data...
 				</div>
-				<div v-if="selectedTab == 3" id="messageSearch" class="tabContent">
-					GROUP LIST
+				<div v-if="selectedTab == 3" id="groupList" class="tabContent">
+					Group data...
 				</div>
 			</div>
 		</div>

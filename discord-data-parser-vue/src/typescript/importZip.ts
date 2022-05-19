@@ -13,19 +13,40 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-declare let Neutralino: any;
+import JSZip from "jszip";
 
-export async function importZip() {
+export async function importZip(dataPackage: any) {
+
+    let data: any;
+
     await Neutralino.os.showOpenDialog("Open package.zip", {
         filters: [
-          {name: "zip", extensions: ["zip"]},
+            {name: "zip", extensions: ["zip"]},
         ]
-      }).then((result: any) => {
-          const path = result[0]
-          if(!path){
-              console.log("Nothing selected...")
-              return;
-          }
-          console.log(`Validating: ${path}`)
-      });
+    }).then(async (result: any) => {
+        const path = result[0]
+
+        if(!path){
+            console.log("Nothing selected...")
+            return;
+        }
+        console.log(`Loading file: ${path}`)
+
+        data = await Neutralino.filesystem.readBinaryFile(path);
+        data = new JSZip().loadAsync(data);
+
+        await data.then((result: any) => {
+            return result.file("account/user.json")?.async("string");
+            
+        })
+        .then(function (result: any) {
+            console.log("validating...")
+            if (result == undefined) {
+                Neutralino.debug.log("No user.json was found", "ERROR");
+                return;
+            }
+            dataPackage.addProfileData(result);
+        });
+    });
+    console.log("Finished importing...")
 }

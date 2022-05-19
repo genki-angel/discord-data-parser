@@ -21,23 +21,23 @@
             <div class="label">Profile data</div>
             <div class="grid">
                 <div class="unselectable">User ID:&nbsp;</div>
-                <div>...</div>
+                <div>USER ID</div>
                 <div class="unselectable">Username:&nbsp;</div>
-                <div>...</div>
+                <div>USER NAME</div>
                 <div class="unselectable">Email:&nbsp;</div>
-                <div>...</div>
+                <div>USER EMAIL</div>
                 <div class="unselectable">Is verified:&nbsp;</div>
-                <div>...</div>
+                <div>USER ISVERIFIED</div>
                 <div class="unselectable">Mobile Number:&nbsp;</div>
-                <div>...</div>
+                <div>USER MOBILE</div>
             </div>
         </div>
     </div> 
 </template>
 
-<script lang="ts">
-    import { defineComponent } from "vue";
-	export default defineComponent({});
+<script setup lang="ts">
+
+
 </script>
 
 <style scoped lang="scss">
@@ -50,6 +50,7 @@
     .grid div:nth-child(odd) {
         text-align: right;
         opacity: 0.6;
+        padding-right: 1em;
     }
     .datapanels {
         display: flex;
