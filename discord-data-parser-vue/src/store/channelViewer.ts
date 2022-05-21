@@ -15,8 +15,15 @@
 
 import { reactive } from "vue";
 
-export const appState = reactive({
+export const channelViewer = reactive({
     isLoading: false,
-    mode: "",
-    selectedChannel: ""
+    selectedMessage: "",
+    messages: [
+        {
+            id: "",
+            timestamp: "",
+            content: "",
+            attachment: ""
+        }
+    ]
 });

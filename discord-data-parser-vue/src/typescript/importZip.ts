@@ -18,11 +18,14 @@ import { appState } from "@/store/appState";
 import { accountDataStore } from "@/store/accountDataStore";
 import { messageStore } from "@/store/messageStore";
 
+export let zipPackage: Promise<JSZip>;
+
 export async function importZip() {
 
     appState.isLoading = true;
+    let ready = false
 
-    const data = await Neutralino.os.showOpenDialog("Open package.zip", {
+    await Neutralino.os.showOpenDialog("Open package.zip", {
         filters: [
             {name: "zip", extensions: ["zip"]},
         ]
@@ -35,14 +38,19 @@ export async function importZip() {
         }
         console.log(`Loading file: ${path}`)
 
-        return await Neutralino.filesystem.readBinaryFile(path);
-    });
+        const fileData = await Neutralino.filesystem.readBinaryFile(path);
+        zipPackage = new JSZip().loadAsync(fileData);
+        console.log("File loaded. processing...")
+        ready = true
+    });    
 
-    console.log("File loaded. processing...")
-    const dataPackage = new JSZip().loadAsync(data);
+    if(!ready){
+        appState.isLoading = false;
+        return;
+    }
 
     // user.json
-    await dataPackage.then(function (userData) {
+    await zipPackage.then(function (userData) {
         return userData.file("account/user.json")?.async("string");
     })
     .then(function (result: any) {
@@ -63,7 +71,7 @@ export async function importZip() {
     ///
 
     // messages/index.json
-    const channels = await dataPackage.then(function (messageIndex) {
+    const channels = await zipPackage.then(function (messageIndex) {
         return messageIndex.file("messages/index.json")?.async("string");
     })
     .then(function (result: any) {
@@ -84,7 +92,7 @@ export async function importZip() {
     
     const loneChannel: { id: string; name: string; }[] = [];
     for (const [channelID, channelName] of channels!) {
-        await dataPackage.then((channelData) => {
+        await zipPackage.then((channelData) => {
             return channelData.file(`messages/c${channelID}/channel.json`)?.async("string");
         })
         .then((result) => {
@@ -142,5 +150,6 @@ export async function importZip() {
         messageStore.groups.shift();
     }
     appState.isLoading = false;
+    appState.mode = "zip"
     console.log("Finished importing...")
 }

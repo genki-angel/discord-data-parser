@@ -43,11 +43,15 @@
 			</div>
 		</div>
 		<div class="messageList">
-			
+			<div v-if="channelViewer.isLoading">IMPORTING MESSAGES.....</div>
+			<div @click="selectMessage(message.id)" class="message" v-for="message in channelViewer.messages" :key="message.id" v-else>
+				{{message.content}}
+				<span style="display: block;" v-if="message.attachment != ''">Attachment: {{message.attachment}}</span>
+			</div>
 		</div>
 		<div class="controlBar backpanel">
 			<div class="channelControls">
-				<div class="displayID"> <span>Channel ID:&nbsp;</span>{{appState.selectedChannel}}</div>
+				<div class="displayID"> <span>Channel Tools - ID:&nbsp;</span> {{appState.selectedChannel}} </div>
 				<div class="controls">
 					<button>Copy ID</button>
 					<button>Export to Text file</button>
@@ -56,11 +60,12 @@
 				</div>
 			</div>
 			<div class="messageControls">
-				<div class="displayID"> <span>Message ID:&nbsp;</span>...</div>
+				<div class="displayID"> <span>Message Tools - ID:&nbsp;</span> {{channelViewer.selectedMessage}} </div>
 				<div class="controls">
 					<button>Copy ID</button>
 					<button>Copy Contents</button>
 					<button>Copy Timestamp</button>
+					<button>Copy Attachment</button>
 					<button>Open in Browser</button>
 					<button>Open in Client</button>
 				</div>
@@ -71,7 +76,9 @@
 
 <script setup lang="ts">
 	import { appState } from '@/store/appState';
-import { messageStore } from '@/store/messageStore';
+	import { messageStore } from '@/store/messageStore';
+	import { channelViewer } from "@/store/channelViewer";
+	import { loadChannelZip } from '@/typescript/loadChannelZip';
 	import { ref } from 'vue';
 	const selectedTab = ref(2)
 
@@ -84,6 +91,16 @@ import { messageStore } from '@/store/messageStore';
 			return;
 		}
 		appState.selectedChannel = id;
+		if(appState.mode == "zip") {
+			loadChannelZip(id);
+		}
+	}
+
+	function selectMessage(id: string) {
+		if(channelViewer.selectedMessage == id) {
+			return;
+		}
+		channelViewer.selectedMessage = id;
 	}
 </script>
 
@@ -106,7 +123,13 @@ import { messageStore } from '@/store/messageStore';
 
 .channelList { grid-area: channelList; padding: 0;}
 
-.messageList { grid-area: messageList; border: 2px solid $accent3-dark;}
+.messageList { grid-area: messageList; 
+	border: 2px solid $accent3-dark; 
+	overflow: auto;
+	overflow-wrap: break-word;
+	padding: 4px;
+	background-color: $accent3-dark;
+}
 
 .controlBar { grid-area: controlBar; 
 	display: flex;
@@ -208,6 +231,15 @@ import { messageStore } from '@/store/messageStore';
 	}
 }
 
+.message {
+	padding: 4px;
+	margin-bottom: 2px;
+	background-color: $accent2-dark;
+	cursor: pointer;
 
+	&:hover {
+		background-color: $accent1-dark;
+	}
+}
 
 </style>
