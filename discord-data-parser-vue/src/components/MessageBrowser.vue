@@ -27,16 +27,16 @@
 				<div v-if="selectedTab == 1" id="serverList" class="tabContent">
 					<div class="serverGroup" v-for="server in messageStore.servers" :key="server.id">
 						<span class="serverName"> {{server.name}} </span>
-						<span class="serverChannel" v-for="channel in server.channels" :key="channel.id"> {{channel.name}} </span>
+						<span @click="openChannel(channel.id)" class="serverChannel" v-for="channel in server.channels" :key="channel.id"> {{channel.name}} </span>
 					</div>
 				</div>
 				<div v-if="selectedTab == 2" id="dmList" class="tabContent">
-					<div class="channel" v-for="channel in messageStore.dms" :key="channel.id">
+					<div @click="openChannel(channel.id)" class="channel" v-for="channel in messageStore.dms" :key="channel.id">
 						{{channel.name}}
 					</div>
 				</div>
 				<div v-if="selectedTab == 3" id="groupList" class="tabContent">
-					<div class="channel" v-for="channel in messageStore.groups" :key="channel.id">
+					<div @click="openChannel(channel.id)" class="channel" v-for="channel in messageStore.groups" :key="channel.id">
 						{{channel.name}}
 					</div>
 				</div>
@@ -47,9 +47,9 @@
 		</div>
 		<div class="controlBar backpanel">
 			<div class="channelControls">
-				<div class="displayID"> <span>Channel ID:&nbsp;</span>...</div>
+				<div class="displayID"> <span>Channel ID:&nbsp;</span>{{appState.selectedChannel}}</div>
 				<div class="controls">
-					<button>Copy</button>
+					<button>Copy ID</button>
 					<button>Export to Text file</button>
 					<button>Open in Browser</button>
 					<button>Open in Client</button>
@@ -70,12 +70,20 @@
 </template>
 
 <script setup lang="ts">
-	import { messageStore } from '@/store/messageStore';
+	import { appState } from '@/store/appState';
+import { messageStore } from '@/store/messageStore';
 	import { ref } from 'vue';
 	const selectedTab = ref(2)
 
 	function changeTab(tab: number) {
 		selectedTab.value = tab;
+	}
+
+	function openChannel(id: string) {
+		if(appState.selectedChannel == id) {
+			return;
+		}
+		appState.selectedChannel = id;
 	}
 </script>
 
@@ -182,13 +190,22 @@
 	margin: 4px;
 	padding: 4px;
 	background-color: $accent2-dark;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $accent1-dark;
+	}
 }
 
 .channel {
-	margin: 2px;
 	margin-bottom: 4px;
 	padding: 4px;
 	background-color: $accent3-dark;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $accent1-dark;
+	}
 }
 
 

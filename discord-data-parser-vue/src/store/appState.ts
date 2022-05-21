@@ -16,5 +16,6 @@
 import { reactive } from "vue";
 
 export const appState = reactive({
-    isLoading: false
+    isLoading: false,
+    selectedChannel: ""
 });
