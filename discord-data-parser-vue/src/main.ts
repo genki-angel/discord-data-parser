@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import Main from "./Main.vue";
+import { appState } from "./store/appState";
 import { channelViewer } from "./store/channelViewer";
 import { messageStore } from "./store/messageStore";
 

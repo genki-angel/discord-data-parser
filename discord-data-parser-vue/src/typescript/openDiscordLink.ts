@@ -13,6 +13,19 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-declare let Neutralino: any;
-declare let NL_APPVERSION: string;
-declare let NL_OS: string;
+export async function openDiscordLink(channelID: string, messageID: string, at: string, client: boolean) {
+    console.log("call 1")
+    if(client){
+        console.log("call 2")
+        if(NL_OS == "Linux") {
+            console.log("call 3")
+            await Neutralino.os.execCommand(`discord --url -- "discord://discord.com/channels/${at}${channelID}/${messageID}"`)
+        } else {
+            console.log("call 4")
+            await Neutralino.os.open(`discord://discord.com/channels/${at}${channelID}/${messageID}`)
+        }
+    }else{
+        console.log("call 5")
+        await Neutralino.os.open(`http://discord.com/channels/${at}${channelID}/${messageID}`);
+    }
+}

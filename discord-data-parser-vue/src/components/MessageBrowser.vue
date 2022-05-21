@@ -53,10 +53,10 @@
 			<div class="channelControls">
 				<div class="displayID"> <span>Channel Tools - ID:&nbsp;</span> {{appState.selectedChannel}} </div>
 				<div class="controls">
-					<button @click="copyToClipboard(appState.selectedChannel)">Copy ID</button>
-					<button>Export to Text file</button>
-					<button>Open in Browser</button>
-					<button>Open in Client</button>
+					<button @click="copyToClipboard(appState.selectedChannel)" >Copy ID</button>
+					<!-- <button>Export to Text file</button> -->
+					<button @click="openDiscord(appState.selectedChannel, '', false)" >Open in Browser</button>
+					<button @click="openDiscord(appState.selectedChannel, '', true)" >Open in Client</button>
 				</div>
 			</div>
 			<div class="messageControls">
@@ -66,8 +66,8 @@
 					<button @click="copyToClipboard(channelViewer.selectedMessage.content)">Copy Contents</button>
 					<button @click="copyToClipboard(channelViewer.selectedMessage.timestamp)">Copy Timestamp</button>
 					<button @click="copyToClipboard(channelViewer.selectedMessage.attachment)">Copy Attachment</button>
-					<button>Open in Browser</button>
-					<button>Open in Client</button>
+					<button @click="openDiscord(appState.selectedChannel, channelViewer.selectedMessage.id, false)">Open in Browser</button>
+					<button @click="openDiscord(appState.selectedChannel, channelViewer.selectedMessage.id, true)"> Open in Client </button>
 				</div>
 			</div>
 		</div>
@@ -80,6 +80,7 @@
 	import { channelViewer } from "@/store/channelViewer";
 	import { loadChannelZip } from '@/typescript/loadChannelZip';
 	import { copyToClipboard } from "@/typescript/copyToClipboard";
+	import { openDiscordLink } from "@/typescript/openDiscordLink";
 	import { ref } from 'vue';
 	const selectedTab = ref(2)
 
@@ -102,6 +103,22 @@
 			return;
 		}
 		channelViewer.selectedMessage = item;
+	}
+
+	function openDiscord(channelID: string, messageID: string ,client: boolean) {
+		let found = false;
+		messageStore.servers.forEach(server => {
+			if(found){return};
+			server.channels.forEach(channel => {
+				if(channelID == channel.id) {
+					openDiscordLink(channelID, messageID, server.id+"/", client)
+					found = true
+					return;
+				}
+			})
+		})
+		if(found){return};
+		openDiscordLink(channelID, messageID, "@me/", client);
 	}
 </script>
 
