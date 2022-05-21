@@ -13,17 +13,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import { reactive } from "vue";
+import copy from "copy-to-clipboard"
 
-export const channelViewer = reactive({
-    isLoading: false,
-    selectedMessage: {id: "", timestamp: "", content: "", attachment: ""},
-    messages: [
-        {
-            id: "",
-            timestamp: "",
-            content: "",
-            attachment: ""
-        }
-    ]
-});
+export async function copyToClipboard(item: string) {
+    if(item == "") {
+        return;
+    }
+    console.log(`Copying: ${item} to clipboard...`)
+    copy(item);
+}

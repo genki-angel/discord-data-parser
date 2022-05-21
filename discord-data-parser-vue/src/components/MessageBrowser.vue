@@ -44,7 +44,7 @@
 		</div>
 		<div class="messageList">
 			<div v-if="channelViewer.isLoading">IMPORTING MESSAGES.....</div>
-			<div @click="selectMessage(message.id)" class="message" v-for="message in channelViewer.messages" :key="message.id" v-else>
+			<div @click="selectMessage(message)" class="message" v-for="message in channelViewer.messages" :key="message.id" v-else>
 				{{message.content}}
 				<span style="display: block;" v-if="message.attachment != ''">Attachment: {{message.attachment}}</span>
 			</div>
@@ -53,19 +53,19 @@
 			<div class="channelControls">
 				<div class="displayID"> <span>Channel Tools - ID:&nbsp;</span> {{appState.selectedChannel}} </div>
 				<div class="controls">
-					<button>Copy ID</button>
+					<button @click="copyToClipboard(appState.selectedChannel)">Copy ID</button>
 					<button>Export to Text file</button>
 					<button>Open in Browser</button>
 					<button>Open in Client</button>
 				</div>
 			</div>
 			<div class="messageControls">
-				<div class="displayID"> <span>Message Tools - ID:&nbsp;</span> {{channelViewer.selectedMessage}} </div>
+				<div class="displayID"> <span>Message Tools - ID:&nbsp;</span> {{channelViewer.selectedMessage.id}} </div>
 				<div class="controls">
-					<button>Copy ID</button>
-					<button>Copy Contents</button>
-					<button>Copy Timestamp</button>
-					<button>Copy Attachment</button>
+					<button @click="copyToClipboard(channelViewer.selectedMessage.id)">Copy ID</button>
+					<button @click="copyToClipboard(channelViewer.selectedMessage.content)">Copy Contents</button>
+					<button @click="copyToClipboard(channelViewer.selectedMessage.timestamp)">Copy Timestamp</button>
+					<button @click="copyToClipboard(channelViewer.selectedMessage.attachment)">Copy Attachment</button>
 					<button>Open in Browser</button>
 					<button>Open in Client</button>
 				</div>
@@ -79,6 +79,7 @@
 	import { messageStore } from '@/store/messageStore';
 	import { channelViewer } from "@/store/channelViewer";
 	import { loadChannelZip } from '@/typescript/loadChannelZip';
+	import { copyToClipboard } from "@/typescript/copyToClipboard";
 	import { ref } from 'vue';
 	const selectedTab = ref(2)
 
@@ -96,11 +97,11 @@
 		}
 	}
 
-	function selectMessage(id: string) {
-		if(channelViewer.selectedMessage == id) {
+	function selectMessage(item: any) {
+		if(channelViewer.selectedMessage.id == item.id) {
 			return;
 		}
-		channelViewer.selectedMessage = id;
+		channelViewer.selectedMessage = item;
 	}
 </script>
 
