@@ -36,9 +36,9 @@ Compile from source: `npm run build`
 
 ## TODO
 
-- [ ] Clean up UI
+- [x] Clean up UI
 - [ ] Add analytic functions
-- [ ] Rewrite file handling and indexing logic
+- [x] Rewrite file handling and indexing logic
 - [ ] Logging
 - [ ] Export data
 - [ ] Message search
