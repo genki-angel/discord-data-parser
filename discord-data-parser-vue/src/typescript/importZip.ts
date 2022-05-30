@@ -15,8 +15,8 @@
 
 import JSZip from "jszip";
 import { appState } from "@/store/appState";
-import { accountDataStore } from "@/store/accountDataStore";
-import { messageStore } from "@/store/messageStore";
+import { dataStore } from "@/store/dataStore";
+import { Channel } from "./classes/Ichannel";
 
 export let zipPackage: Promise<JSZip>;
 
@@ -60,13 +60,13 @@ export async function importZip() {
             return;
         }
 
-        // This should be added to the store as this will be repeated when importing folder
         const parsed = JSON.parse(result);
-        accountDataStore.userID = parsed["id"]
-        accountDataStore.userName = parsed["username"] + "#" + parsed["discriminator"]
-        accountDataStore.userEmail = parsed["email"]
-        accountDataStore.userVerified = String(!parsed["verified"])
-        accountDataStore.userMobile = parsed["phone"]
+        dataStore.accountID = parsed["id"]
+        dataStore.accountName = parsed["username"]
+        dataStore.accountDescriminator = parsed["discriminator"]
+        dataStore.accountEmail = parsed["email"]
+        dataStore.accountIsVerified = parsed["verified"]
+        dataStore.accountPhoneNo = parsed["phone"]
     });
     ///
 
@@ -89,8 +89,7 @@ export async function importZip() {
         return index;
     });
 
-    
-    const loneChannel: { id: string; name: string; }[] = [];
+    const loneChannel: string[] = [];
     for (const [channelID, channelName] of channels!) {
         await zipPackage.then((channelData) => {
             return channelData.file(`messages/c${channelID}/channel.json`)?.async("string");
@@ -106,49 +105,52 @@ export async function importZip() {
             const type = parsed["type"];
             switch (type) {
                 case 0: {
+                    
                     if(!Object.prototype.hasOwnProperty.call(parsed, "guild")) {
-                        loneChannel.push({id: channelID, name: "Unknown channel"});
+                        dataStore.channels.set(channelID, {name: channelID, type: parsed["type"]})
+                        loneChannel.push(channelID);
                         break;
                     }
-                    const getGuild = messageStore.servers.find((guild) => { 
-                        return guild.id === parsed["guild"]["id"]
-                    })
-                    if (getGuild) {
-                        console.log("Guild found! " + getGuild.name);
-                        getGuild.channels.push({id: channelID, name: channelName});
+                    dataStore.channels.set(channelID, {name: channelName, type: parsed["type"]})
+                    if(dataStore.guilds.has(parsed["guild"]["id"])){
+                        console.log("Guild found!")
+                        dataStore.guilds.get(parsed["guild"]["id"])?.channels.push(channelID);
                         break;
                     }
-                    messageStore.servers.push( {id: parsed["guild"]["id"], name: parsed["guild"]["name"], channels: [{id: channelID, name: channelName}]} );
+                    dataStore.guilds.set(parsed["guild"]["id"], {name: parsed["guild"]["name"], channels: [channelID]})
                     break;
                 }
                 case 1: {
                     const name = channelName.substring(20);
-                    messageStore.dms.push( {id: channelID, name: name} );
+                    // messageStore.dms.push( {id: channelID, name: name} );
+                    dataStore.channels.set(channelID, {name: name, type: parsed["type"]})
                     break;
                 }
                 case 3: {
                     let name;
                     if(channelName == null) {
-                        name = "Unnamed Group"
+                        name = channelID
                     } else { name = channelName};
-                    messageStore.groups.push( {id: channelID, name: name} )
+                    // messageStore.groups.push( {id: channelID, name: name} )
+                    dataStore.channels.set(channelID, {name: name, type: parsed["type"]})
                     break;
                 }
             }
         });
     };
 
-    messageStore.servers.push( {id: "NULL", name: "Unknown Server", channels: loneChannel} );
+    // messageStore.servers.push( {id: "NULL", name: "Unknown Server", channels: loneChannel} );
+    dataStore.guilds.set("NULL", {name: "Unknown Server", channels: loneChannel});
 
-    if(!(messageStore.servers[0].id.length > 1)) {
-        messageStore.servers.shift();
-    }
-    if(!(messageStore.dms[0].id.length > 1)) {
-        messageStore.dms.shift();
-    }
-    if(!(messageStore.groups[0].id.length > 1)) {
-        messageStore.groups.shift();
-    }
+    // if(!(messageStore.servers[0].id.length > 1)) {
+    //     messageStore.servers.shift();
+    // }
+    // if(!(messageStore.dms[0].id.length > 1)) {
+    //     messageStore.dms.shift();
+    // }
+    // if(!(messageStore.groups[0].id.length > 1)) {
+    //     messageStore.groups.shift();
+    // }
     appState.isLoading = false;
     appState.mode = "zip"
     console.log("Finished importing...")

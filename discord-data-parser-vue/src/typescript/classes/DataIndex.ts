@@ -13,12 +13,19 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import { reactive } from "vue";
+import { Channel } from "./Ichannel";
+import { Guild } from "./Iguild";
 
-export const accountDataStore = reactive({
-    userID: "...",
-    userName: "...",
-    userEmail: "...",
-    userVerified: "...",
-    userMobile: "..."
-});
+export class DataIndex {
+    // ### ACCOUNT DATA ###
+    accountID = "";
+    accountName = "null";
+    accountDescriminator = "#0000";
+    accountEmail = "";
+    accountIsVerified = false;
+    accountPhoneNo = "";
+
+    // ### CHANNEL DATA ###
+    channels = new Map<string, Channel>();
+    guilds = new Map<string, Guild>();
+}

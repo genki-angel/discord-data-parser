@@ -21,22 +21,22 @@
             <div class="label">Profile data</div>
             <div class="grid">
                 <div class="unselectable">User ID:&nbsp;</div>
-                <div>{{ accountDataStore.userID }}</div>
+                <div>{{ dataStore.accountID }}</div>
                 <div class="unselectable">Username:&nbsp;</div>
-                <div>{{ accountDataStore.userName }}</div>
+                <div>{{ dataStore.accountName }}#{{ dataStore.accountDescriminator}}</div>
                 <div class="unselectable">Email:&nbsp;</div>
-                <div>{{ accountDataStore.userEmail }}</div>
+                <div>{{ dataStore.accountEmail }}</div>
                 <div class="unselectable">Is verified:&nbsp;</div>
-                <div>{{ accountDataStore.userVerified }}</div>
+                <div>{{ dataStore.accountIsVerified }}</div>
                 <div class="unselectable">Mobile Number:&nbsp;</div>
-                <div>{{ accountDataStore.userMobile }}</div>
+                <div>{{ dataStore.accountPhoneNo }}</div>
             </div>
         </div>
     </div> 
 </template>
 
 <script setup lang="ts">
-import { accountDataStore } from '@/store/accountDataStore';
+import { dataStore } from '@/store/dataStore';
 
 </script>
 

@@ -25,19 +25,23 @@
 					<button class="button" @click="changeTab(3)">Groups</button>
 				</div>
 				<div v-if="selectedTab == 1" id="serverList" class="tabContent">
-					<div class="serverGroup" v-for="server in messageStore.servers" :key="server.id">
-						<span class="serverName"> {{server.name}} </span>
-						<span @click="openChannel(channel.id)" class="serverChannel" v-for="channel in server.channels" :key="channel.id"> {{channel.name}} </span>
+					<div class="serverGroup" v-for="[key, value] in dataStore.guilds" :key="key">
+						<span class="serverName"> {{ value.name }} </span>
+						<span @click="openChannel(channel)" class="serverChannel" v-for="channel in value.channels" :key="channel"> {{ dataStore.channels.get(channel)?.name }} </span>
 					</div>
 				</div>
 				<div v-if="selectedTab == 2" id="dmList" class="tabContent">
-					<div @click="openChannel(channel.id)" class="channel" v-for="channel in messageStore.dms" :key="channel.id">
-						{{channel.name}}
-					</div>
+					<div v-for="[key, value] in dataStore.channels" :key="key">
+						<div @click="openChannel(key)" class="channel" v-if="value.type == 1">
+							{{ value.name }}
+						</div>
+					</div>	
 				</div>
 				<div v-if="selectedTab == 3" id="groupList" class="tabContent">
-					<div @click="openChannel(channel.id)" class="channel" v-for="channel in messageStore.groups" :key="channel.id">
-						{{channel.name}}
+					<div v-for="[key, value] in dataStore.channels" :key="key">
+						<div @click="openChannel(key)" class="channel" v-if="value.type == 3">
+							{{ value.name }}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -76,7 +80,8 @@
 
 <script setup lang="ts">
 	import { appState } from '@/store/appState';
-	import { messageStore } from '@/store/messageStore';
+	// import { messageStore } from '@/store/messageStore';
+	import { dataStore } from '@/store/dataStore';
 	import { channelViewer } from "@/store/channelViewer";
 	import { loadChannelZip } from '@/typescript/loadChannelZip';
 	import { copyToClipboard } from "@/typescript/copyToClipboard";
@@ -106,19 +111,36 @@
 	}
 
 	function openDiscord(channelID: string, messageID: string ,client: boolean) {
-		let found = false;
-		messageStore.servers.forEach(server => {
-			if(found){return};
-			server.channels.forEach(channel => {
-				if(channelID == channel.id) {
-					openDiscordLink(channelID, messageID, server.id+"/", client)
-					found = true
+		// let found = false;
+		// dataStore.guilds.forEach(guild => {
+		// 	if(found){return};
+		// 	guild.channels.forEach(channel => {
+		// 		if(channelID == channel) {
+		// 			openDiscordLink(channelID, messageID, guild.id+"/", client)
+		// 			found = true
+		// 			return;
+		// 		}
+		// 	})
+		// })
+		// if(found){return};
+
+		if(dataStore.channels.get(channelID)?.type) {
+			openDiscordLink(channelID, messageID, "@me/", client);
+			return;
+		}
+
+		dataStore.guilds.forEach((guild, key) => {
+			guild.channels.forEach(channel => {
+				if(channelID == channel) {
+					openDiscordLink(channelID, messageID, key+"/", client)
 					return;
 				}
 			})
 		})
-		if(found){return};
-		openDiscordLink(channelID, messageID, "@me/", client);
+
+		
+
+		
 	}
 </script>
 

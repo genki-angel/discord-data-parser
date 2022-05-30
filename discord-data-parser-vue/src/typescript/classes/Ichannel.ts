@@ -13,31 +13,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import { reactive } from 'vue'
-
-export const messageStore = reactive({
-  servers: [
-    {
-      id: "",
-      name: "",
-      channels: [
-        {
-          id: "",
-          name: ""
-        },
-      ]
-    }
-  ],
-  dms: [
-    {
-      id: "",
-      name: ""
-    }
-  ],
-  groups: [
-    {
-      id: "",
-      name: "",
-    }
-  ],
-})
+export interface Channel {
+    name: string;
+    type: number;
+}
